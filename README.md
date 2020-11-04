@@ -39,8 +39,6 @@ The blocks which is purple(Application) provide by smart wear developer.
 
 TODO
 
-- 
-
 # License
 
 Unless stated elsewhere, file headers or otherwise, all files herein are licensed under an GPLv3 license. For more information, please read the LICENSE file.
