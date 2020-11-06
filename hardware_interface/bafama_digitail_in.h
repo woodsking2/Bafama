@@ -35,8 +35,7 @@ namespace bafama
          *      auto const disable_result = digitail_in->disable();
          *      Ensures(disable_result == Result::success);
          *
-         *      auto const remove_result = Digitail_in::remove(digitail_in);
-         *      Ensures(remove_result == Result::success);
+         *      delete digitail_in;
          *
          * @endcode
          */
@@ -57,13 +56,6 @@ namespace bafama
             static std::pair<Result, Digitail_in *> create(int pin, Pull_mode mode);
 
             /**
-             * @brief delete a Digitail_in instance
-             *        Implement by PCBA manufacturer
-             *        Used by application developer
-             */
-            static Result remove(gsl::not_null<Digitail_in *>);
-
-            /**
              * @brief get the implement pointer
              *        Implement by PCBA manufacturer
              *        Used by PCBA manufacturer
@@ -75,13 +67,13 @@ namespace bafama
              *        low: low level
              *        Implement by PCBA manufacturer
              *        Used by application developer
-             * @code
              */
             virtual std::pair<Result, bool> read() = 0;
 
+            virtual ~Digitail_in() override = default;
+
         protected:
             Digitail_in() = default;
-            virtual ~Digitail_in() override = default;
         };
     } // namespace hardware_interface
 } // namespace bafama

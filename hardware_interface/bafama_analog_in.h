@@ -36,8 +36,7 @@ namespace bafama
          *      auto const disable_result = analog_in->disable();
          *      Ensures(disable_result == Result::success);
          *
-         *      auto const remove_result = Analog_in::remove(analog_in);
-         *      Ensures(remove_result == Result::success);
+         *      delete analog_in;
          *
          * @endcode
          */
@@ -50,13 +49,6 @@ namespace bafama
              *        Used by application developer
              */
             static std::pair<Result, Analog_in *> create(int pin);
-
-            /**
-             * @brief delete a Analog_in instance
-             *        Implement by PCBA manufacturer
-             *        Used by application developer
-             */
-            static Result remove(gsl::not_null<Analog_in *>);
 
             /**
              * @brief get the implement pointer
@@ -94,9 +86,10 @@ namespace bafama
              */
             virtual Result disable() = 0;
 
+            virtual ~Analog_in() override = default;
+
         protected:
             Analog_in() = default;
-            virtual ~Analog_in() override = default;
         };
     } // namespace hardware_interface
 } // namespace bafama
