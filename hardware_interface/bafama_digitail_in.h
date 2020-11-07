@@ -39,7 +39,7 @@ namespace bafama
          *
          * @endcode
          */
-        class Digitail_in
+        class Digitail_in : private Noncopyable<Digitail_in>
         {
         public:
             enum class Pull_mode
@@ -53,7 +53,7 @@ namespace bafama
              *        Implement by PCBA manufacturer
              *        Used by application developer
              */
-            static std::pair<Result, Digitail_in *> create(int pin, Pull_mode mode);
+            static std::pair<Result, gsl::owner<Digitail_in *>> create(int pin, Pull_mode mode);
 
             /**
              * @brief get the implement pointer
@@ -70,7 +70,12 @@ namespace bafama
              */
             virtual std::pair<Result, bool> read() = 0;
 
-            virtual ~Digitail_in() override = default;
+            /**
+             * @brief Destroy the Digitail_out object
+             *        Implement by PCBA manufacturer
+             *        Used by application developer
+             */
+            virtual ~Digitail_in() = default;
 
         protected:
             Digitail_in() = default;

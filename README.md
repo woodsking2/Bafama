@@ -7,15 +7,16 @@ It includes all the features you need to develop a smart wear, including display
 
 # Features
 
-## writing by modern c++
+- **writing by modern c++**
 
-## compatibility with Keil (armcc)
 
-​	In smart wear, most MCU manufacturers only provide Keil build environment.
+- **compatibility with Keil (armcc)**
 
-## power full and fast GUI based on GUIX
+  ​	In smart wear, most MCU manufacturers only provide Keil build environment.
 
-## partial frame buffers support
+- **power full and fast GUI based on GUIX**
+
+- **partial frame buffers support**
 
 TODO
 

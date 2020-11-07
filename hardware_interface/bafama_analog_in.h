@@ -12,12 +12,16 @@
 #include "bafama_port.h"
 #include "bafama_types.h"
 #include "gsl/gsl"
+#include "bafama_noncopyable.h"
 #ifdef __cplusplus
 namespace bafama
 {
     namespace hardware_interface
     {
         /**
+         *
+         * @brief application developer can use pin to create a analog_in or get Analog_in* by other way
+         *
          * @code
          *      auto const create_result = Analog_in::create(analog_in_pin);
          *      Ensures(create_result.first == Result::success);
@@ -40,7 +44,7 @@ namespace bafama
          *
          * @endcode
          */
-        class Analog_in
+        class Analog_in : private Noncopyable<Analog_in>
         {
         public:
             /**
@@ -48,7 +52,7 @@ namespace bafama
              *        Implement by PCBA manufacturer
              *        Used by application developer
              */
-            static std::pair<Result, Analog_in *> create(int pin);
+            static std::pair<Result, gsl::owner<Analog_in *>> create(int pin);
 
             /**
              * @brief get the implement pointer
@@ -86,7 +90,12 @@ namespace bafama
              */
             virtual Result disable() = 0;
 
-            virtual ~Analog_in() override = default;
+            /**
+             * @brief Destroy the Digitail_out object
+             *        Implement by PCBA manufacturer
+             *        Used by application developer
+             */
+            virtual ~Analog_in() = default;
 
         protected:
             Analog_in() = default;

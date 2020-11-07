@@ -41,7 +41,7 @@ namespace bafama
          *
          * @endcode
          */
-        class Digitail_out
+        class Digitail_out : private Noncopyable<Digitail_out>
         {
         public:
             /**
@@ -49,7 +49,7 @@ namespace bafama
              *        Implement by PCBA manufacturer
              *        Used by application developer
              */
-            static std::pair<Result, Digitail_out *> create(int pin);
+            static std::pair<Result, gsl::owner<Digitail_out *>> create(int pin);
 
             /**
              * @brief get the implement pointer
@@ -74,7 +74,12 @@ namespace bafama
              */
             virtual Result write(bool) = 0;
 
-            virtual ~Digitail_out() override = default;
+            /**
+             * @brief Destroy the Digitail_out object
+             *        Implement by PCBA manufacturer
+             *        Used by application developer
+             */
+            virtual ~Digitail_out() = default;
 
         protected:
             Digitail_out() = default;
